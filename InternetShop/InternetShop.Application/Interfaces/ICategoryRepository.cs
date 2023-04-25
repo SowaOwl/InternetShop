@@ -2,7 +2,7 @@
 
 namespace InternetShop.Application.Interfaces
 {
-    internal interface ICategoryRepository
+    public interface ICategoryRepository
     {
         public void Add(Category category);
     }
