@@ -1,4 +1,6 @@
+using InternetShop.Application.Interfaces;
 using InternetShop.Presistance;
+using InternetShop.Presistance.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,7 @@ string connString = builder.Configuration.GetConnectionString("DefaultConnection
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connString));
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 var app = builder.Build();
 
