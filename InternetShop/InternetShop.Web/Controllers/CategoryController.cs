@@ -65,5 +65,13 @@ namespace InternetShop.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult Delete(int id) { 
+            var category = _categoryRepository.GetById(id);
+
+           _categoryRepository.Remove(category);
+
+            return RedirectToAction("Index");
+        }
     }
 }

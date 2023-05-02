@@ -2,7 +2,7 @@
 
 namespace InternetShop.Application.Interfaces
 {
-    public interface ICategoryRepository : IGenericRepository<Category> 
+    public interface IApplicationType : IGenericRepository<ApplicationType>
     {
     }
 }

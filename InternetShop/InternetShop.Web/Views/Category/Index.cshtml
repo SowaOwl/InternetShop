@@ -29,7 +29,7 @@
                     <td>@category.Name</td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@category.Id" class="btn btn-primary">Redact</a>
-                        <a class="btn btn-danger delete">Delete</a>
+                        <a class="btn btn-danger delete" id="@category.Id">Delete</a>
                     </td>
                 </tr>
                 count++;
@@ -51,13 +51,30 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
+                    let isDeleted = Delete(this);
+                    if (isDeleted) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    }
                 }
             })
         })
+        function Delete(el) {
+            let id = Number($(el).attr('id'));
+            return $.ajax({
+                url: '@Url.Action("Delete", "Category")',
+                dataType: 'post',
+                data: { id: id },
+                success: function() {
+                    return true;
+                },
+                error: function() {
+                    return false;
+                }
+            })
+        }
     </script>
 }

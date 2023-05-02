@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InternetShop.Presistance.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230424150208_AddCategory")]
-    partial class AddCategory
+    [Migration("20230502150317_AddAplicationTypeModel")]
+    partial class AddAplicationTypeModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,23 @@ namespace InternetShop.Presistance.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("InternetShop.Domain.Entites.ApplicationType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicationTypes");
+                });
+
             modelBuilder.Entity("InternetShop.Domain.Entites.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -31,6 +48,9 @@ namespace InternetShop.Presistance.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
